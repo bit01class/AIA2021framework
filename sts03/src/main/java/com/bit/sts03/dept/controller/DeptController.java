@@ -63,6 +63,16 @@ public class DeptController {
 		}
 		return "redirect:./"+deptno;
 	}
+	
+	@RequestMapping(value = "/dept/{deptno}/del",method = RequestMethod.POST)
+	public String delete(@PathVariable("deptno") int deptno) {
+		try {
+			deptService.delete(deptno);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "redirect:../";
+	}
 }
 
 

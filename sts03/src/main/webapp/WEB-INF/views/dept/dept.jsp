@@ -49,6 +49,9 @@ $(function(){
 			<button type="button" class="btn btn-default btn-block">뒤로</button>
 		</div>
 	</form>
+	<form action="${bean.deptno }/del" method="post">
+		<button type="submit" class="btn btn-danger btn-block">삭제</button>
+	</form>
 	</div>
 </div>
 </body>
