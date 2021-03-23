@@ -10,6 +10,10 @@
 		</layout>
 	</appender>
 	
+	<logger name="com.bit.sts03.util">
+		<level value="debug" />
+	</logger>
+	
 	<!-- Application Loggers -->
 	<logger name="com.bit.sts03">
 		<level value="info" />
