@@ -11,7 +11,7 @@
 <%@ include file="../template/menu.jspf" %>
 <div class="container">
 	<div>
-	<form method="post">
+	<form method="post" action="/sts03/login/">
 		<div class="form-group">
 			<input type="text" class="form-control" name="ename" placeholder="ename" >
 		</div>

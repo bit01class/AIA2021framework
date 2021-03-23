@@ -25,7 +25,9 @@
 	
 	<interceptors>
 		<interceptor>
-			<mapping path="/dept/*"/> 
+			<mapping path="/dept/add"/> 
+			<mapping path="/dept/1"/> 
+			<mapping path="/dept/2"/> 
 			<beans:bean class="com.bit.sts03.util.LoginInterceptor"/>
 		</interceptor>
 	</interceptors>
