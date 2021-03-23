@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="${root }">
@@ -12,7 +12,15 @@
     	<li><a href="#">INTRO</a></li>
     	<li><a href="${root }dept/">DEPT</a></li>
     	<li><a href="${root }emp/">EMP</a></li>
+    	<c:if test="${sessionScope.result eq null }">
     	<li><a href="${root }login/">LOGIN</a></li>
+    	</c:if>
+    	<c:if test="${sessionScope.result }">
+    	<li><a href="${root }logout/">LOGOUT</a></li>
+    	</c:if>
     </ul>
+    <c:if test="${sessionScope.result }">
+    <p class="navbar-text  navbar-right">${sessionScope.loginName }님 로그인 중</p>
+    </c:if>
   </div>
 </nav>
