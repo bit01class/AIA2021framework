@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>step01</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  
+  <filter>
+  	<filter-name>ex11</filter-name>
+  	<filter-class>com.bit.util.MyFilter01</filter-class>
+  	<init-param>
+  		<param-name>name1</param-name>
+  		<param-value>val1</param-value>
+  	</init-param>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>ex11</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <servlet>
+  	<servlet-name>ex01</servlet-name>
+  	<servlet-class>com.bit.controller.Ex01Controller</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ex02</servlet-name>
+  	<servlet-class>com.bit.controller.Ex02Controller</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+  	<servlet-name>ex01</servlet-name>
+  	<url-pattern>/ex01.bit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ex02</servlet-name>
+  	<url-pattern>/ex02.bit</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+
+
+
+
+
+
+
+

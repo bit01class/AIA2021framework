@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<package name="step1" namespace="/" extends="struts-default">
+		<action name="ex01" class="com.bit.action.Ex01Action">
+			<result>/index.jsp</result>
+		</action>
+		<action name="ex02" class="com.bit.action.Ex02Action">
+			<result>/index.jsp</result>
+		</action>
+		<action name="ex03" class="com.bit.action.Ex01Action">
+			<result>/ex03.jsp</result>
+		</action>
+		<action name="ex05" class="com.bit.action.Ex05Action">
+			<result>/ex05.jsp</result>
+		</action>
+		<action name="ex06" class="com.bit.action.Ex06Action">
+			<interceptor-ref name="params"/>
+			<result name="input">/ex05.jsp</result>
+			<result name="success">/ex06.jsp</result>
+		</action>
+		
+	</package>
+	<package name="sec" namespace="/test01" extends="step1">
+		<action name="ex01" class="com.bit.action.Ex02Action">
+			<result>/ex03.jsp</result>
+		</action>
+	</package>
+</struts>
+
+
+
+
+
+
+
+

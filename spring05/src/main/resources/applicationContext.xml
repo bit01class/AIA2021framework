@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean
+	id="dataSource"
+	class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+	p:driverClassName="org.mariadb.jdbc.Driver"
+	p:url="jdbc:mariadb://localhost:3306/xe"
+	p:username="scott" p:password="tiger"
+	/>
+	
+	<bean
+	id="jdbcTemplate"
+	class="org.springframework.jdbc.core.JdbcTemplate"
+	p:dataSource-ref="dataSource"
+	/>
+	
+	<bean
+	id="sqlMapClient"
+	class="org.springframework.orm.ibatis.SqlMapClientFactoryBean"
+	p:dataSource-ref="dataSource"
+	p:configLocation="classpath:/sqlMapConfig.xml"
+	/>
+	
+	<bean
+	id="sqlMapClientTemplate"
+	class="org.springframework.orm.ibatis.SqlMapClientTemplate"
+	p:sqlMapClient-ref="sqlMapClient"
+	/>
+	
+	<bean
+	id="transactionManager"
+	class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+	p:dataSource-ref="dataSource"
+	/>
+	
+	<bean
+	id="deptDao"
+	class="com.bit.dept.model.DeptDao02Impl"
+	p:template-ref="sqlMapClientTemplate"
+	/>
+	
+	<bean
+	id="methodBeforeAdvice"
+	class="com.bit.aop.BitBeforeMethod"
+	/>
+	<bean
+	id="afterReturningAdvice"
+	class="com.bit.aop.BitAfterReturnMethod"
+	/>
+	<bean
+	id="throwsAdvice"
+	class="com.bit.aop.BitAfterExceptionMethod"
+	/>
+	<bean
+	id="methodInterceptor"
+	class="com.bit.aop.BitAroundMethod"
+	/>
+	
+	<bean
+	id="pointcut2"
+	class="org.springframework.aop.support.NameMatchMethodPointcut">
+		<property name="mappedNames">
+			<list>
+				<value>selectOne</value>
+				<value>insertOne</value>
+			</list>
+		</property>
+	</bean>
+	<bean
+	id="pointcut"
+	class="org.springframework.aop.support.JdkRegexpMethodPointcut">
+		<property name="patterns">
+			<list>
+				<value>.*select.*</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean
+	id="pointcutAdvisor"
+	class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="methodBeforeAdvice"/>
+		<property name="pointcut" ref="pointcut"/>
+	</bean>
+	
+	<bean
+	id="proxy"
+	class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="deptDao"/>
+		<property name="interceptorNames">
+			<list>
+				<value>pointcutAdvisor</value>
+			</list>
+		</property>
+	</bean>
+</beans>
+
+
+
+
+
+
+

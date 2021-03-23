@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="dataSource" 
+	class="org.mariadb.jdbc.MariaDbDataSource">
+		<property name="url" value="jdbc:mysql://localhost:3306/xe"/>
+		<property name="user" value="scott"></property>
+		<property name="password" value="tiger"></property>
+	</bean>
+
+	<bean id="deptDao"
+	class="com.bit.model.DeptDao03">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+<!-- handlerMapping -->
+<!-- url에 따른 컨트롤러 선택 -->
+	<bean 
+	id="handlerMapping"
+	class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean>
+
+	<bean name="/index.do"
+		class="com.bit.controller.IndexController" />
+	<bean name="/intro.do"
+		class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" value="intro"></property>
+	</bean>
+	<bean name="/list.do"
+		class="com.bit.controller.ListController">
+		<property name="dao" ref="deptDao"></property>	
+	</bean>
+	<bean name="/add.do"
+	class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" value="add"></property>
+	</bean>
+	<bean name="/insert.do"
+		class="com.bit.controller.AddController">
+		<property name="dao" ref="deptDao"></property>	
+	</bean>
+	<bean name="/dept.do"
+	class="com.bit.controller.OneController">
+		<property name="dao" ref="deptDao"></property>
+	</bean>
+	<bean name="/update.do"
+	class="com.bit.controller.EditController">
+		<property name="dao" ref="deptDao"></property>
+	</bean>
+	<bean name="/delete.do"
+		class="com.bit.controller.DelController">
+		<property name="dao" ref="deptDao"></property>	
+	</bean>
+<!-- viewResolver -->
+<!-- 결정된 뷰의 지정 -->
+	<bean
+	id="viewResolver"
+	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+</beans>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="default" extends="struts-default">
+		<action name="index" class="com.bit.i2.action.IndexAction">
+			<result>/index.jsp</result>
+		</action>
+		<action name="ex01" class="com.bit.i2.action.Ex02Action">
+			<interceptor-ref name="prepare"/>
+			<interceptor-ref name="modelDriven"/>
+			<interceptor-ref name="params"/>
+			<result>/result.jsp</result>
+		</action>
+		<action name="ex04" class="com.bit.i2.action.Ex04Action">
+			<result>/ex05.jsp</result>
+		</action>
+		<action name="ex03" class="com.bit.i2.action.Ex03Action">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="validation"/>
+			<result name="error">/index.jsp</result>
+			<result name="input">/ex03.jsp</result>
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="ex05" class="com.bit.i2.action.Ex05Action">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="validation"/>
+			<result name="error">/index.jsp</result>
+			<result name="input">/ex05.jsp</result>
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="add" class="com.bit.i2.action.Ex04Action">
+			<result>/add.jsp</result>
+		</action>
+		<action name="insert" class="com.bit.i2.action.InsertAction">
+			<interceptor-ref name="prepare"/>
+			<interceptor-ref name="modelDriven"/>
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="validation"/>
+			<result name="input">/add.jsp</result>
+			<result name="success" type="redirectAction">index</result>
+		</action>
+	</package>
+</struts>
+
+
+
+
+
+
+

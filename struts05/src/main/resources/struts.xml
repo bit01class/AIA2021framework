@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+    <package name="basicstruts2" extends="struts-default">
+        <action name="index">
+            <result>/index.jsp</result>
+        </action>
+        <action name="list" class="com.bit.dept.action.DeptAction">
+        	<result>/list.jsp</result>
+        </action>
+        
+        <action name="add">
+        	<result>/add.jsp</result>
+        </action>
+        <action name="insert" class="com.bit.dept.action.DeptAction" method="addOne">
+        	<result type="redirectAction">list</result>
+        </action>
+        <action name="deptOne" class="com.bit.dept.action.DeptAction" method="selectOne">
+        	<result>
+        		<param name="location">/add.jsp</param>
+        	</result>
+        </action>
+        <action name="edit" class="com.bit.dept.action.DeptAction" method="editOne">
+        	<result type="redirectAction">
+        		<param name="deptno">${deptno}</param>
+        		<param name="actionName">deptOne</param>
+        	</result>
+        </action>
+        <action name="delete" class="com.bit.dept.action.DeptAction" method="deleteOne">
+        	<result type="redirectAction">
+        		<param name="actionName">list</param>
+        	</result>
+        </action>
+    </package>
+
+</struts>
+
+
+
+
+
+
+
+

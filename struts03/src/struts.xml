@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+<struts>
+	<package name="default" extends="struts-default">
+		<action name="index" class="com.bit.action.IndexAction">
+			<result>/index.jsp</result>
+		</action>
+		<action name="dept" class="com.bit.action.DeptAction">
+			<interceptor-ref name="params"/>
+			<result>/dept.jsp</result>
+		</action>
+		<action name="addDept" class="com.bit.action.IndexAction">
+			<result>/add.jsp</result>
+		</action>
+		<action name="insertDept" class="com.bit.action.AddDeptAction">
+			<interceptor-ref name="params"/>
+			<result name="input">/add.jsp</result>
+			<result name="success" type="redirect">dept.action</result>
+		</action>
+		<action name="deptOne" class="com.bit.action.OneDeptAction">
+			<interceptor-ref name="params"/>
+			<result>/edit.jsp</result>
+		</action>
+		<action name="updateDept" class="com.bit.action.EditDeptAction">
+			<interceptor-ref name="params"></interceptor-ref>
+			<result type="redirect">
+			<param name="idx">${deptno}</param>
+			<param name="location">deptOne.action</param>
+			</result>
+		</action>
+	</package>
+</struts>
+
+
+
+
+
+
+
