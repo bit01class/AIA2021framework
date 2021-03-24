@@ -37,5 +37,9 @@ public class DeptDaoImpl implements DeptDao {
 	public List<DeptVo> selectAll(String keyword) {
 		return session.selectList("dept.selectAll",keyword);
 	}
+	@Override
+	public List<DeptVo> selectAll(List list) {
+		return session.selectList("dept.selectAll2",list);
+	}
 	
 }

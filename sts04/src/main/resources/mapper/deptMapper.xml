@@ -12,6 +12,12 @@
   		</if>
   		order by deptno
   	</select>
+  	<select id="selectAll2" resultType="deptVo">
+  		select * from dept where deptno in
+  		<foreach collection="list" index="index" item="val" open="(" close=")" separator=",">
+  			#{val}
+  		</foreach>
+  	</select>
   	<select id="selectOne" parameterType="_int" resultType="deptVo" >
   		select * from dept where deptno=#{value}
   	</select>

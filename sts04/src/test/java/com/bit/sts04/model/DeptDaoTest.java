@@ -5,6 +5,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -71,7 +75,8 @@ public class DeptDaoTest {
 	
 	@Test
 	public void testSelectAll2() {
-		System.out.println(deptDao.selectAll());
+		List<Integer> list2=Arrays.asList(2,3,4);
+		System.out.println(deptDao.selectAll(list2));
 	}
 }
 

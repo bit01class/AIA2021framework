@@ -8,6 +8,7 @@ public interface DeptDao {
 
 	List<DeptVo> selectAll();
 	List<DeptVo> selectAll(String keyword);
+	List<DeptVo> selectAll(List list);
 
 	DeptVo selectOne(int key);
 
