@@ -21,4 +21,19 @@ public class DeptServiceImpl implements DeptService {
 	public void insert(DeptVo bean) {
 		deptDao.insertOne(bean);
 	}
+
+	@Override
+	public void detail(Model model, int deptno) {
+		model.addAttribute("bean", deptDao.selectOne(deptno));
+	}
+
+	@Override
+	public void update(DeptVo bean) {
+		deptDao.updateOne(bean);
+	}
+
+	@Override
+	public void delete(int deptno) {
+		deptDao.deleteOne(deptno);
+	}
 }

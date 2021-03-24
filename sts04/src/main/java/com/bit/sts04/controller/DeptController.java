@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -40,6 +42,23 @@ public class DeptController {
 			return "add";
 			
 		deptService.insert(bean);
+		return "redirect:./";
+	}
+	
+	@RequestMapping(value = "/dept/{1}",method = RequestMethod.GET)
+	public String detail(@PathVariable("1") int deptno,Model model) {
+		deptService.detail(model, deptno);
+		return "detail";
+	}
+	@RequestMapping(value = "/dept/{1}",method = RequestMethod.PUT)
+	public String detail(@PathVariable("1") int deptno
+			,@ModelAttribute DeptVo bean) {
+		deptService.update(bean);
+		return "redirect:./"+deptno;
+	}
+	@RequestMapping(value = "/dept/{1}",method = RequestMethod.DELETE)
+	public String detail(@PathVariable("1") int deptno) {
+		deptService.delete(deptno);
 		return "redirect:./";
 	}
 }

@@ -8,4 +8,7 @@ public interface DeptService {
 
 	void list(Model model);
 	void insert(DeptVo bean);
+	void detail(Model model,int deptno);
+	void update(DeptVo bean);
+	void delete(int deptno);
 }
