@@ -29,6 +29,21 @@
 	  <h1>ADD page!</h1>
 	  <p>...</p>
 	</div>
+	<form class="form-horizontal" action="./" method="post">
+	  <div class="form-group">
+	    <input type="text" value="${bean.deptno }" name="deptno" placeholder="deptno" class="form-control" />
+	  </div>
+	  <div class="form-group">
+	    <input type="text" value="${bean.dname }" name="dname" placeholder="dname" class="form-control" />
+	  </div>
+	  <div class="form-group">
+	    <input type="text" value="${bean.loc }" name="loc" placeholder="loc" class="form-control" />
+	  </div>
+	  <div class="form-group">
+	    <button type="submit">입 력</button>
+	    <button type="reset">취 소</button>
+	  </div>
+	</form>
 </div>
 </body>
 </html>
