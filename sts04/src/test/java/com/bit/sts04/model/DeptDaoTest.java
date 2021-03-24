@@ -29,11 +29,13 @@ public class DeptDaoTest {
 
 	@Before
 	public void setUp() throws Exception {
+		System.out.println("setUp");
 		target=new DeptVo(99,"test","test");
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		System.out.println("tearDown");
 		try {
 			deptDao.insertOne(target);
 		}catch (Exception e) {
@@ -41,21 +43,25 @@ public class DeptDaoTest {
 	}
 	@Test
 	public void testDao() {
+		System.out.println("testDao");
 		assertNotNull(deptDao);
 	}
 	@Test
 	public void testSelectAll() {
+		System.out.println("testSelectAll");
 		assertNotNull(deptDao.selectAll());
 		assertFalse(deptDao.selectAll().size()==0);
 	}
 
 	@Test
 	public void testSelectOne() {
+		System.out.println("testSelectOne");
 		assertEquals(target, deptDao.selectOne(target.getDeptno()));
 	}
 
 	@Test
 	public void testInsertOne() {
+		System.out.println("testInsertOne");
 		try {
 			deptDao.insertOne(target);
 			fail("Not yet implemented");
@@ -65,16 +71,19 @@ public class DeptDaoTest {
 
 	@Test
 	public void testUpdateOne() {
+		System.out.println("testUpdateOne");
 		assertEquals(1, deptDao.updateOne(target));
 	}
 
 	@Test
 	public void testDeleteOne() {
+		System.out.println("testDeleteOne");
 		assertEquals(1, deptDao.deleteOne(target.getDeptno()));
 	}
 	
 	@Test
 	public void testSelectAll2() {
+		System.out.println("testSelectAll2");
 		List<Integer> list2=Arrays.asList(2,3,4);
 		System.out.println(deptDao.selectAll(list2));
 	}

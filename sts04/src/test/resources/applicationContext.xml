@@ -2,8 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
 	<bean id="propertyPlaceholderConfigurer"
 	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -36,6 +38,25 @@
 		<constructor-arg ref="sqlSessionFactory"/>
 	</bean>
 	
+	<bean id="beforeAdvice"
+	class="com.bit.sts04.aop.AopBefore"></bean>
+	<bean id="afterAdvice"
+	class="com.bit.sts04.aop.AopAfter"></bean>
+	<aop:config>
+		<aop:aspect ref="beforeAdvice">
+			<aop:pointcut expression="execution(* com.bit.sts04.model.DeptDao.select*(..)) " id="beforePointCut"/>
+			<aop:before method="before" pointcut-ref="beforePointCut"/>
+		</aop:aspect>
+		<aop:aspect ref="afterAdvice">
+			<aop:pointcut expression="execution(* com.bit.sts04.model.DeptDao.select*(..)) " id="afterPointCut"/>
+			<aop:after method="after" pointcut-ref="afterPointCut"/>
+			<!-- 
+			<aop:after-returning method="after" pointcut-ref="afterPointCut"/>
+			<aop:after-throwing method="after" pointcut-ref="afterPointCut"/>
+			 -->
+		</aop:aspect>
+	</aop:config>
+	<aop:aspectj-autoproxy/>
 	<context:component-scan base-package="com.bit.sts04.model"></context:component-scan>
 </beans>
 
