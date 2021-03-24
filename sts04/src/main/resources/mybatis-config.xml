@@ -3,6 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   <configuration>
+  	<typeAliases>
+		<typeAlias alias="deptVo" type="com.bit.sts04.model.entity.DeptVo"/>
+  	</typeAliases>
   	<mappers>
   		<mapper resource="mapper/deptMapper.xml"/>
   	</mappers>

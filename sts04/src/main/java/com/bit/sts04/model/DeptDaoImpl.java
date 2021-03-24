@@ -33,5 +33,9 @@ public class DeptDaoImpl implements DeptDao {
 	public int deleteOne(int key) {
 		return session.delete("dept.deleteOne",key);
 	}
+	@Override
+	public List<DeptVo> selectAll(String keyword) {
+		return session.selectList("dept.selectAll",keyword);
+	}
 	
 }

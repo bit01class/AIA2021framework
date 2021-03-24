@@ -5,13 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import javax.sql.DataSource;
-
-import org.apache.ibatis.session.SqlSession;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,4 +68,21 @@ public class DeptDaoTest {
 	public void testDeleteOne() {
 		assertEquals(1, deptDao.deleteOne(target.getDeptno()));
 	}
+	
+	@Test
+	public void testSelectAll2() {
+		System.out.println(deptDao.selectAll());
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
