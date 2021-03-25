@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.bit.sts05.model.DeptDao;
@@ -26,6 +27,7 @@ public class DeptServiceImpl implements DeptService {
 		model.addAttribute("bean", deptDao.selectOne(key));
 	}
 
+	@Transactional
 	@Override
 	public void insertOne(DeptVo bean) {
 		DeptDao deptDao=sqlSession.getMapper(DeptDao.class);
