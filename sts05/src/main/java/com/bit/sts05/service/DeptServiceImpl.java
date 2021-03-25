@@ -4,12 +4,18 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.bit.sts05.model.DeptDao;
 import com.bit.sts05.model.entity.DeptVo;
 
+
+//https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte:psl:transaction:declarative_transaction_management
+@Transactional(isolation = Isolation.DEFAULT
+,propagation = Propagation.REQUIRED)
 @Service
 public class DeptServiceImpl implements DeptService {
 	@Inject
@@ -26,24 +32,22 @@ public class DeptServiceImpl implements DeptService {
 		DeptDao deptDao=sqlSession.getMapper(DeptDao.class);
 		model.addAttribute("bean", deptDao.selectOne(key));
 	}
-
-	@Transactional
 	@Override
-	public void insertOne(DeptVo bean) {
+	public void insertOne(DeptVo bean) throws Exception {
 		DeptDao deptDao=sqlSession.getMapper(DeptDao.class);
 		deptDao.insertOne(bean);
 	}
 
 	@Override
-	public void updateOne(DeptVo bean) {
+	public void updateOne(DeptVo bean) throws Exception {
 		DeptDao deptDao=sqlSession.getMapper(DeptDao.class);
-		deptDao.updateOne(bean);
+		if(deptDao.updateOne(bean)==0) throw new Exception();
 	}
 
 	@Override
-	public void deleteOne(int key) {
+	public void deleteOne(int key) throws Exception {
 		DeptDao deptDao=sqlSession.getMapper(DeptDao.class);
-		deptDao.deleteOne(key);
+		if(deptDao.deleteOne(key)==0) throw new Exception();
 	}
 
 }

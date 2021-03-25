@@ -15,8 +15,10 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 
@@ -25,10 +27,12 @@ import com.bit.sts05.model.entity.DeptVo;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 		"classpath:/applicationContext.xml"})
+
+@Transactional
 public class DeptServiceTest {
 	@Inject
 	DeptService deptService;
@@ -66,8 +70,8 @@ public class DeptServiceTest {
 	public void test2InsertOne() {
 		try {
 		deptService.insertOne(target);
+		fail("입력이 되버렸음");
 		}catch (Exception e) {
-			fail();
 		}
 	}
 
