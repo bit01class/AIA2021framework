@@ -1,8 +1,6 @@
 package com.bit.sts05.service;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -44,7 +42,7 @@ public class DeptServiceTest {
 	}
 
 	@Test
-	public void test1SelectAll() {
+	public void test1SelectAll() throws Exception {
 		try {
 		deptService.selectAll(model);
 		Map<String, Object> map = model.asMap();
@@ -54,7 +52,7 @@ public class DeptServiceTest {
 		}
 		assertFalse(map.isEmpty());
 		}catch (Exception e) {
-			fail("Not yet implemented");
+			throw new Exception();
 		}
 	}
 
