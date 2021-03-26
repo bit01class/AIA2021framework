@@ -65,10 +65,12 @@ function updatePage(){
 	var deptno=$('form').find('input:eq(0)').val();
 	console.log(deptno);
 	$.ajax('dept/'+deptno,{
-		data:{deptno:'1',dname:'test',loc:'test'}
+		data:JSON.stringify({deptno:'1',dname:'test',loc:'test'})
 		,type:'put'
-		,dataType  : "json"
-        ,contentType: "application/json"
+		,contentType: 'application/json; charset=utf-8'
+//			data:param,
+//        ,contentType:false
+        ,processData:false
 		,success:function(data){
 			console.log(data);
 		}

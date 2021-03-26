@@ -1,5 +1,6 @@
 package com.bit.sts06;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,7 +57,7 @@ public class DeptController {
 		}
 	}
 	
-	@PutMapping("/dept/{deptno}")
+	@PutMapping(value = "/dept/{deptno}")
 	public void update(@PathVariable int deptno
 						,@RequestBody DeptVo bean) {
 		System.out.println(bean);
