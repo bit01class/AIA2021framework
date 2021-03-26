@@ -11,4 +11,23 @@
 	p:url="jdbc:h2:tcp://localhost/~/test"
 	p:username="sa" p:password=""
 	/>	
+	
+	<bean id="sqlSessionFactory"
+	class="org.mybatis.spring.SqlSessionFactoryBean"
+	p:dataSource-ref="dataSource"
+	p:configLocation="classpath:/mybatis-config.xml"
+	/>
+	
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
