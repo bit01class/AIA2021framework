@@ -21,7 +21,24 @@ $(function(){
 	listPage();
 	
 	//$('.modal').modal({show:true});
+	$('.table>button').click(function(){
+		addForm();
+	});
+	$('.modal .btn-primary').click(function(){
+		addDept();
+	});
 });	
+function addDept(){
+	$.post("dept",$('form').serialize(),function(data){
+							console.log(data);
+							$('.modal').modal('hide');
+							$('form').find('input').val('');
+						});
+}
+function addForm(){
+	$('.modal').modal({show:true});
+	
+}
 function listPage(){
 	$('.list-group').children().filter(':gt(0)').remove();
 	$.getJSON('dept',function(data){
@@ -53,6 +70,7 @@ function listPage(){
 	  	<p>loc</p>
 	  </li>
 	</ul>
+	<button class="btn btn-primary btn-block">입 력</button>
 </div>
 
 <!-- modal -->
@@ -60,13 +78,17 @@ function listPage(){
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title">입력페이지</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Modal body text goes here.</p>
+      <form>
+        <p class="form-group"><input type="text" class="form-control" name="deptno" placeholder="deptno"/> </p>
+        <p class="form-group"><input type="text" class="form-control" name="dname" placeholder="dname"/> </p>
+        <p class="form-group"><input type="text" class="form-control" name="loc" placeholder="loc"/> </p>
+      </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

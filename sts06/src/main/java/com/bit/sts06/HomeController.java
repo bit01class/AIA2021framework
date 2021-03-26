@@ -11,12 +11,17 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.h2.util.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.bit.sts06.model.DeptDao;
 import com.bit.sts06.model.entity.DeptVo;
@@ -44,6 +49,7 @@ public class HomeController {
 	@GetMapping(value = "/dept")
 	@ResponseBody 
 	public List<DeptVo> list() {
+		
 		List<DeptVo> list=null;
 		try(
 			SqlSession session=sqlSessionFactory.openSession();
@@ -51,6 +57,12 @@ public class HomeController {
 			list=session.getMapper(DeptDao.class).selectAll();
 		}
 		return list;
+	}
+	
+	@PostMapping("/dept")
+	public ResponseEntity add(DeptVo bean) {
+		System.out.println(bean);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
 
