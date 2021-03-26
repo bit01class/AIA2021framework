@@ -18,13 +18,21 @@
 var row;	
 $(function(){
 	row=$('.list-group').html();
-	$('.list-group')
-		.append($(row).html('<h4>추가1</h4><p>첫번째줄</p>'))
-		.append($(row).html('<h4>추가2</h4><p>첫번째줄</p>'))
-		.append($(row).html('<h4>추가3</h4><p>첫번째줄</p>'))
-		.append($(row).html('<h4>추가4</h4><p>첫번째줄</p>'))
-		;
+	listPage();
+	
+	//$('.modal').modal({show:true});
 });	
+function listPage(){
+	$('.list-group').children().filter(':gt(0)').remove();
+	$.getJSON('/sts06/resources/list.json',function(data){
+		for(var ele of data){
+			var obj=$(row);
+			obj.find('h4').html(ele.dname);
+			obj.find('p').html(ele.loc);
+			obj.appendTo('.list-group');
+		}
+	});
+}
 	
 	</script>
 </head>
@@ -45,6 +53,27 @@ $(function(){
 	  	<p>loc</p>
 	  </li>
 	</ul>
+</div>
+
+<!-- modal -->
+<div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 </body>
