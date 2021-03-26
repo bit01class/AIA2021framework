@@ -36,9 +36,6 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
  */
 @Controller
 public class HomeController {
-	@Inject
-	SqlSessionFactory sqlSessionFactory;
-	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -46,24 +43,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@GetMapping(value = "/dept")
-	@ResponseBody 
-	public List<DeptVo> list() {
-		
-		List<DeptVo> list=null;
-		try(
-			SqlSession session=sqlSessionFactory.openSession();
-				){
-			list=session.getMapper(DeptDao.class).selectAll();
-		}
-		return list;
-	}
 	
-	@PostMapping("/dept")
-	public ResponseEntity add(DeptVo bean) {
-		System.out.println(bean);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
 }
 
 

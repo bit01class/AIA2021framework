@@ -16,7 +16,7 @@ public interface DeptDao {
 	@Select("select * from dept where deptno=#{key}")
 	DeptVo selectOne(int key);
 	
-	@Insert("insert into dept values (#{deptno},#{dname},#{loc}")
+	@Insert("insert into dept values (#{deptno},#{dname},#{loc})")
 	void insertOne(DeptVo bean);
 	
 	@Update("update dept set dname=#{dname},loc=#{loc} where deptno=#{deptno}")

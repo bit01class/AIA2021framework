@@ -11,6 +11,9 @@
 		a>ul>li:first-child {
 			width: 213px;
 		}
+		.list-group-item-action{
+			cursor: pointer;
+		}
 	</style>
 	<script type="text/javascript" src="webjars/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript" src="webjars/bootstrap/4.6.0-1/js/bootstrap.min.js"></script>
@@ -24,28 +27,63 @@ $(function(){
 	$('.table>button').click(function(){
 		addForm();
 	});
-	$('.modal .btn-primary').click(function(){
-		addDept();
-	});
+	
 });	
 function addDept(){
 	$.post("dept",$('form').serialize(),function(data){
 							console.log(data);
+							listPage();
 							$('.modal').modal('hide');
 							$('form').find('input').val('');
 						});
 }
 function addForm(){
+	$('.modal-title').text('입력페이지');
 	$('.modal').modal({show:true});
+	$('.modal .btn-primary').off().click(function(){
+		addDept();
+	});
 	
+}
+function detailPage(){
+	deptno=$(this).attr('deptno');
+	$.getJSON('dept/'+deptno,function(data){
+		deptForm(data);
+	});
+}
+function deptForm(data){
+	$('.modal-title').text('상세페이지');
+	$('.modal').find('input').eq(0).val(data.deptno);
+	$('.modal').find('input').eq(1).val(data.dname);
+	$('.modal').find('input').eq(2).val(data.loc);
+	$('.modal').modal('show');
+	$('.modal .btn-primary').off().click(function(){
+		updatePage();
+	});
+}
+function updatePage(){
+	var deptno=$('form').find('input:eq(0)').val();
+	console.log(deptno);
+	$.ajax('dept/'+deptno,{
+		data:{deptno:'1',dname:'test',loc:'test'}
+		,type:'put'
+		,dataType  : "json"
+        ,contentType: "application/json"
+		,success:function(data){
+			console.log(data);
+		}
+	});
 }
 function listPage(){
 	$('.list-group').children().filter(':gt(0)').remove();
 	$.getJSON('dept',function(data){
 		for(var ele of data){
 			var obj=$(row);
+			obj.addClass('list-group-item-action');
 			obj.find('h4').html(ele.dname);
 			obj.find('p').html(ele.loc);
+			obj.attr('deptno',ele.deptno);
+			obj.click(detailPage);
 			obj.appendTo('.list-group');
 		}
 	});
