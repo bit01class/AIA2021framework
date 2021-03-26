@@ -170,7 +170,14 @@
 		    <groupId>org.webjars</groupId>
 		    <artifactId>bootstrap</artifactId>
 		    <version>4.6.0-1</version>
-		</dependency>  
+		</dependency> 
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.12.2</version>
+		</dependency>
+		 
 	</dependencies>
     <build>
         <plugins>

@@ -1,5 +1,11 @@
 package com.bit.sts06.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+
+//@JsonInclude(Include.NON_NULL)
+
 public class DeptVo {
 	private int deptno;
 	private String dname,loc;

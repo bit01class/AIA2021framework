@@ -24,7 +24,7 @@ $(function(){
 });	
 function listPage(){
 	$('.list-group').children().filter(':gt(0)').remove();
-	$.getJSON('/sts06/resources/list.json',function(data){
+	$.getJSON('dept',function(data){
 		for(var ele of data){
 			var obj=$(row);
 			obj.find('h4').html(ele.dname);
