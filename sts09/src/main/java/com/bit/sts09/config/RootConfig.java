@@ -3,8 +3,13 @@ package com.bit.sts09.config;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.bit.sts09.model.DeptDao;
 
 /*
 	<bean id="sqlSessionFactory"
@@ -13,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 	</bean>	
  */
 @Configuration
+@MapperScan(basePackageClasses = {DeptDao.class} )
 public class RootConfig {
 
 	@Bean
@@ -24,6 +30,13 @@ public class RootConfig {
 		dataSource.setUsername("scott");
 		dataSource.setPassword("tiger");
 		return dataSource;
+	}
+	
+	@Bean
+	public SqlSessionFactory getSqlSessionFactory() throws Exception {
+		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+		factoryBean.setDataSource(getDataSource());
+		return factoryBean.getObject();
 	}
 }
 
