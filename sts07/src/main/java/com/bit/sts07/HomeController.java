@@ -2,6 +2,7 @@ package com.bit.sts07;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -12,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -61,6 +64,27 @@ public class HomeController {
 		) {
 			int su=-1;
 			while((su=is.read())!=-1) os.write(su);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/down/{rename:.+}")
+	public void down2(@PathVariable("rename") String rename,HttpServletResponse res) {
+		logger.debug(rename);
+		File file=new File(path+rename);
+		res.setContentType("application/octet-stream");
+		res.setHeader("Content-Disposition"
+				, "attachment; filename=\""
+				+rename.substring(rename.indexOf('@')+1)+"\"");
+		try(
+			InputStream is=new FileInputStream(file);	
+			OutputStream os=res.getOutputStream();
+		){
+			int su=-1;
+			while((su=is.read())!=-1) os.write(su);
+		} catch (FileNotFoundException e) {
+					e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

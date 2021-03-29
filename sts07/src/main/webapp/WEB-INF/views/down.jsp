@@ -9,5 +9,6 @@
 <body>
 	<h1>업로드 완료</h1>
 	<p><a href="down?rename=${reName }">${origin}</a></p>
+	<p><a href="down/${reName }">${origin}</a></p>
 </body>
 </html>
