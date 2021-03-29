@@ -6,14 +6,32 @@
 	<title>Home</title>
 	<meta charset="utf-8">
 	<script type="text/javascript" src="webjars/jquery/3.6.0/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js" integrity="sha512-hsqWiVBsPC5Hz9/hy5uQX6W6rEtBjtI8vyOAR4LAFpZAbQjJ43uIdmKsA7baQjM318sf8BBqrMkcWsfSsaWCNg==" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="webjars/sockjs-client/1.5.0/dist/sockjs.min.js"></script>
+	<script type="text/javascript">
+	var sock;
+	function callback(e){
+		console.log('>>>>',e.data);
+		$('<li>'+e.data+'</li>').appendTo('ul');
+	}
+	$(function(){
+		sock=new SockJS('/sts08/echo');
+		sock.onmessage=callback;
+		$('button').click(function(){
+			var msg=$('input').val();
+			sock.send(msg);
+			$('input').val("");
+		});
+	});
 	
+	</script>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+<h1>웹채팅</h1>
+<div>
+	<input/><button>전송</button>
+</div>
+<div>
+	<ul></ul>
+</div>
 </body>
 </html>

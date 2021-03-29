@@ -11,6 +11,9 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<websocket:handlers>
 		<websocket:mapping handler="webSocketHandler" path="/echo" />
+		<websocket:handshake-interceptors>
+			<bean class="com.bit.sts08.websocket.EchoInterceptor"/>
+		</websocket:handshake-interceptors>
 		<websocket:sockjs></websocket:sockjs>
 	</websocket:handlers>	
 </beans>
