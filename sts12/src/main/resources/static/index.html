@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+window.onload=function(){
+	fetch('dept/')
+	.then(function(res){return res.json();})
+	.then(function(data){
+		var msg="";
+		for(var obj of data){
+			msg+='<tr>';
+			msg+='<td>'+obj.deptno+'</td>';
+			msg+='<td>'+obj.dname+'</td>';
+			msg+='<td>'+obj.loc+'</td>';
+			msg+='</tr>';
+		}
+		document.querySelector('tbody').innerHTML=msg;
+	});
+	
+};
+
+</script>
+</head>
+<body>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>deptno</th>
+				<th>dname</th>
+				<th>loc</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+</body>
+</html>
